@@ -1,0 +1,4 @@
+﻿  FTicGame.cpp
+C:\Users\monta\OneDrive\C++\TicTacToe\TicTacToe\FTicGame.cpp(7,12): warning C4244: 'initializing': conversion from 'double' to 'int32', possible loss of data
+C:\Users\monta\OneDrive\C++\TicTacToe\TicTacToe\FTicGame.cpp(122,12): warning C4244: 'initializing': conversion from 'double' to 'int32', possible loss of data
+  TicTacToe.vcxproj -> C:\Users\monta\OneDrive\C++\TicTacToe\Debug\TicTacToe.exe
