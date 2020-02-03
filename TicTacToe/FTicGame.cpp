@@ -60,8 +60,6 @@ EGameComplete FTicGame::IsGameComplete(FTicState GameState, int32 LastPlay) cons
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				FString a = GameState.GameScreen[i][j].c_str();
-				std::cout << GameState.GameScreen[i][j].c_str();
 				if (GameState.GameScreen[i][j] == FString(""))
 				{
 					return EGameComplete::In_Play;
@@ -85,10 +83,33 @@ void FTicGame::Reset()
 			NewGameState.GameScreen[i][j] = " ";
 }
 
-EInputValidity FTicGame::IsValidInput(FString) const
+EInputValidity FTicGame::IsValidInput(FTicState GameState, FString Input) const
 {
-	// TODO fill this out
-	return EInputValidity::Valid;
+	int32 Row = floor((Input - 1) / 3);
+	int32 Col = (Input - 1) % 3;
+
+	// Number not in range (is length 1 -> is a number && in range)
+	if (Input.length() != 1)
+	{
+		return EInputValidity::WrongLength;
+	}
+	else if (!Input.isdigit())
+	{
+		return EInputValidity::NotNumber;
+	}
+	else if (std::stoi(Input) < 1 || std::stoi(Input) > 9)
+	{
+		return EInputValidity::NotNumberInRange;
+	}
+	// Space already taken
+	else if (GameState.GameScreen[Col][Row] != "")
+	{
+		return EInputValidity::SpaceAlreadyTaken;
+	}
+	else
+	{
+		return EInputValidity::Valid;
+	}
 }
 
 void FTicGame::ShowScreen(FTicState NewGameState) const
